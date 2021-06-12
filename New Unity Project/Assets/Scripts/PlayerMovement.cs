@@ -25,6 +25,9 @@ public class PlayerMovement : MonoBehaviour
 
     public RaycastHit2D anchor;
 
+    //Script References
+    private AudioManager am;
+
     //Schlampigkeit
     private bool ripped;
     private bool notyetready;
@@ -38,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         lr = GetComponent<LineRenderer>();
+        am = GameObject.Find("AudioManager").GetComponent<AudioManager>();
     }
 
     // Update is called once per frame
@@ -62,6 +66,9 @@ public class PlayerMovement : MonoBehaviour
 
         if (curDis > maxDis && !notyetready)
         {
+            //Audio
+            am.Play("rip");
+
             ripped = true;
             lr.SetPosition(0, Vector3.zero);
             lr.enabled = false;
@@ -73,6 +80,9 @@ public class PlayerMovement : MonoBehaviour
 
         if (curDis > startDis + 1f && !notyetready)
         {
+            //Audio
+            am.Play("rip");
+
             ripped = true;
             lr.SetPosition(0, Vector3.zero);
             lr.enabled = false;
@@ -98,6 +108,9 @@ public class PlayerMovement : MonoBehaviour
 
     void ShootHook()
     {
+        //Audio
+        am.Play("Shoot");
+
         lr.enabled = true;
         ripped = false;
         movement = true;
@@ -107,7 +120,14 @@ public class PlayerMovement : MonoBehaviour
 
         anchor = Physics2D.Raycast(transform.position, dir, maxDis, Mask);
 
-        Debug.Log(anchor.collider.name);
+        if(curDis >= maxDis)
+        {
+            lr.enabled = false;
+            ripped = true;
+            movement = false;
+            Debug.LogError("Too long + TODO: Display");
+            return;
+        }
 
         curDis = Vector2.Distance(transform.position, new Vector2(anchor.point.x, anchor.point.y));
         startDis = Vector2.Distance(transform.position, new Vector2(anchor.point.x, anchor.point.y));
@@ -132,6 +152,9 @@ public class PlayerMovement : MonoBehaviour
         Vector3 endPosition = lr.GetPosition(0);
 
         Vector3 pos = startPosition;
+
+        if(pos == endPosition) am.Play("hook");
+
         while(pos != endPosition)
         {
             float t = (Time.time - startTime) / animationTime / startDis;
