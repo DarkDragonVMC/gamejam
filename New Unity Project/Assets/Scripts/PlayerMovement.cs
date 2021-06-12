@@ -147,6 +147,7 @@ public class PlayerMovement : MonoBehaviour
             movement = false;
             Debug.LogError("Too long + TODO: Display");
             am.Play("too_long");
+            GameObject.Find("Toolong").GetComponent<Animator>().Play("fade");
             return;
         }
 
@@ -157,6 +158,7 @@ public class PlayerMovement : MonoBehaviour
             movement = false;
             Debug.LogError("Too long + TODO: Display");
             am.Play("too_long");
+            GameObject.Find("Toolong").GetComponent<Animator>().Play("fade");
             rb.velocity = Vector2.zero;
             return;
         }
