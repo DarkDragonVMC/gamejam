@@ -5,6 +5,7 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.Timeline;
 using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class PlayerMovement : MonoBehaviour
 
     public RaycastHit2D anchor;
 
+    public int hooks;
+
     //Script References
     private AudioManager am;
 
@@ -42,6 +45,8 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         lr = GetComponent<LineRenderer>();
         am = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+        hooks = 3;
+        GameObject.Find("HookDisplay").GetComponent<Text>().text = "Hooks: " + hooks;
     }
 
     // Update is called once per frame
@@ -82,6 +87,7 @@ public class PlayerMovement : MonoBehaviour
             Debug.LogError("Ripped1 + TODO: Display");
             curDis = 0;
             rb.velocity = Vector2.zero;
+            GameObject.Find("Toolong").GetComponent<Animation>().Play();
             return;
         }
 
@@ -96,6 +102,7 @@ public class PlayerMovement : MonoBehaviour
             Debug.LogError("Ripped2 + TODO: Display");
             curDis = 0;
             rb.velocity = Vector2.zero;
+            GameObject.Find("Toolong").GetComponent<Animation>().Play();
             return;
         }
 
@@ -119,6 +126,11 @@ public class PlayerMovement : MonoBehaviour
 
     void ShootHook()
     {
+        if(hooks == 0)
+        {
+            return;
+        }
+
         lr.enabled = true;
         ripped = false;
         movement = true;
@@ -160,6 +172,9 @@ public class PlayerMovement : MonoBehaviour
         //Audio
         am.Play("Shoot");
         Invoke("PlayHook", animationTime * startDis - 0.11f);
+
+        hooks -= 1;
+        GameObject.Find("HookDisplay").GetComponent<Text>().text = "Hooks: " + hooks;
     }
 
     void ChangeColor()

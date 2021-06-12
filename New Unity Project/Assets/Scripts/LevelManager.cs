@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
@@ -9,12 +10,14 @@ public class LevelManager : MonoBehaviour
     public Level[] levels;
     public int curArray;
     public CamController cam;
+    public PlayerMovement pm;
 
     // Start is called before the first frame update
     void Start()
     {
         curArray = 0;
         cam = GameObject.Find("Main Camera").GetComponent<CamController>();
+        pm = GameObject.Find("Player").GetComponent<PlayerMovement>();
     }
 
     // Update is called once per frame
@@ -49,6 +52,9 @@ public class LevelManager : MonoBehaviour
         Destroy(oldTrans.transform.parent.gameObject);
 
         cam.StartCoroutine("MoveCam");
+
+        pm.hooks = 3;
+        GameObject.Find("HookDisplay").GetComponent<Text>().text = "Hooks: " + pm.hooks;
 
         return;
     }
