@@ -47,6 +47,11 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!movement)
+        {
+            rb.velocity = Vector2.zero;
+        }
+        
         ChangeColor();
 
         //Shoot
@@ -104,6 +109,10 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(0, -speed);
         else if (Input.GetKey(KeyCode.D))
             rb.velocity = new Vector2(speed, 0);
+        if (!movement)
+        {
+            rb.velocity = Vector2.zero;
+        }
     }
 
     void ShootHook()
@@ -134,6 +143,7 @@ public class PlayerMovement : MonoBehaviour
             movement = false;
             Debug.LogError("Too long + TODO: Display");
             am.Play("too_long");
+            rb.velocity = Vector2.zero;
             return;
         }
 
