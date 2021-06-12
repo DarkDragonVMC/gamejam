@@ -8,11 +8,13 @@ public class LevelManager : MonoBehaviour
 
     public Level[] levels;
     public int curArray;
+    public CamController cam;
 
     // Start is called before the first frame update
     void Start()
     {
         curArray = 0;
+        cam = GameObject.Find("Main Camera").GetComponent<CamController>();
     }
 
     // Update is called once per frame
@@ -41,9 +43,13 @@ public class LevelManager : MonoBehaviour
 
         after.transform.rotation = new Quaternion(0, 0, rot, 0);
 
-       
+        GameObject.Find("Player").transform.position = GameObject.Find("SpawnPoint").transform.position;
+        Destroy(GameObject.Find("SpawnPoint"));
 
         Destroy(oldTrans.transform.parent.gameObject);
+
+        cam.StartCoroutine("MoveCam");
+
         return;
     }
 }
