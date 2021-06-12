@@ -87,7 +87,6 @@ public class PlayerMovement : MonoBehaviour
             Debug.LogError("Ripped1 + TODO: Display");
             curDis = 0;
             rb.velocity = Vector2.zero;
-            GameObject.Find("Toolong").GetComponent<Animation>().Play();
             return;
         }
 
@@ -102,7 +101,6 @@ public class PlayerMovement : MonoBehaviour
             Debug.LogError("Ripped2 + TODO: Display");
             curDis = 0;
             rb.velocity = Vector2.zero;
-            GameObject.Find("Toolong").GetComponent<Animation>().Play();
             return;
         }
 
@@ -147,6 +145,7 @@ public class PlayerMovement : MonoBehaviour
             movement = false;
             Debug.LogError("Too long + TODO: Display");
             am.Play("too_long");
+            GameObject.Find("Toolong").GetComponent<Animator>().Play("fade");
             return;
         }
 
@@ -158,6 +157,7 @@ public class PlayerMovement : MonoBehaviour
             Debug.LogError("Too long + TODO: Display");
             am.Play("too_long");
             rb.velocity = Vector2.zero;
+            GameObject.Find("Toolong").GetComponent<Animator>().Play("fade");
             return;
         }
 
