@@ -120,6 +120,15 @@ public class PlayerMovement : MonoBehaviour
 
         anchor = Physics2D.Raycast(transform.position, dir, maxDis, Mask);
 
+        if(anchor.collider == null)
+        {
+            lr.enabled = false;
+            ripped = true;
+            movement = false;
+            Debug.LogError("Too long + TODO: Display");
+            return;
+        }
+
         if(curDis >= maxDis)
         {
             lr.enabled = false;
