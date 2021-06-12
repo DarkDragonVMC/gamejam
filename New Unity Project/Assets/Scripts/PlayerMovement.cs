@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     //Schlampigkeit
     private bool ripped;
     private bool notyetready;
+    private bool movement;
 
 
     // Start is called before the first frame update
@@ -76,6 +77,9 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Movement
+        
+        if(movement)
+
         if (Input.GetKey(KeyCode.W))
             rb.velocity = new Vector2(0, speed);
         else if (Input.GetKey(KeyCode.A))
@@ -90,6 +94,7 @@ public class PlayerMovement : MonoBehaviour
     {
         lr.enabled = true;
         ripped = false;
+        movement = true;
         mPos = Input.mousePosition;
         mPos = Camera.main.ScreenToWorldPoint(mPos);
 
@@ -98,10 +103,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (curDis > maxDis)
         {
+            lr.enabled = false;
             Debug.LogError("Too long + TODO: Display");
             curDis = 0;
             startDis = 0;
             notyetready = true;
+            movement = false;
             return;
         }
 
@@ -111,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
 
     void ChangeColor()
     {
-        if (curDis > startDis) lr.material = rope_redm;
+        if (curDis > startDis - 0.5f) lr.material = rope_redm;
         else lr.material = ropem;
     }
 }
