@@ -87,7 +87,6 @@ public class PlayerMovement : MonoBehaviour
             Debug.LogError("Ripped1 + TODO: Display");
             curDis = 0;
             rb.velocity = Vector2.zero;
-            GameObject.Find("Toolong").GetComponent<Animation>().Play();
             return;
         }
 
@@ -102,7 +101,6 @@ public class PlayerMovement : MonoBehaviour
             Debug.LogError("Ripped2 + TODO: Display");
             curDis = 0;
             rb.velocity = Vector2.zero;
-            GameObject.Find("Toolong").GetComponent<Animation>().Play();
             return;
         }
 
