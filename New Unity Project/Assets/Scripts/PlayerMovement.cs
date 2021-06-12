@@ -23,12 +23,14 @@ public class PlayerMovement : MonoBehaviour
 
     public float animationTime;
 
-    public RaycastHit2D hit;
+    public RaycastHit2D anchor;
 
     //Schlampigkeit
     private bool ripped;
     private bool notyetready;
     private bool movement;
+
+    public LayerMask Mask;
 
 
     // Start is called before the first frame update
@@ -50,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
         //Update Rope location
         lr.SetPosition(1, transform.position);
 
-        curDis = Vector2.Distance(transform.position, new Vector2(mPos.x, mPos.y));
+        curDis = Vector2.Distance(transform.position, new Vector2(anchor.point.x, anchor.point.y));
 
         if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
             rb.velocity = Vector2.zero;
@@ -63,18 +65,18 @@ public class PlayerMovement : MonoBehaviour
             ripped = true;
             lr.SetPosition(0, Vector3.zero);
             lr.enabled = false;
-            Debug.LogError("Ripped + TODO: Display");
+            Debug.LogError("Ripped1 + TODO: Display");
             curDis = 0;
             rb.velocity = Vector2.zero;
             return;
         }
 
-        if (curDis > startDis + 0.75f && !notyetready)
+        if (curDis > startDis + 1f && !notyetready)
         {
             ripped = true;
             lr.SetPosition(0, Vector3.zero);
             lr.enabled = false;
-            Debug.LogError("Ripped + TODO: Display");
+            Debug.LogError("Ripped2 + TODO: Display");
             curDis = 0;
             rb.velocity = Vector2.zero;
             return;
@@ -103,30 +105,22 @@ public class PlayerMovement : MonoBehaviour
         mPos = Camera.main.ScreenToWorldPoint(mPos);
         Vector2 dir = new Vector2(mPos.x - transform.position.x, mPos.y - transform.position.y);
 
-        Physics2D.Raycast(transform.position, dir, maxDis, 3);
+        anchor = Physics2D.Raycast(transform.position, dir, maxDis, Mask);
 
-        curDis = Vector2.Distance(transform.position, new Vector2(mPos.x, mPos.y));
-        startDis = Vector2.Distance(transform.position, new Vector2(mPos.x, mPos.y));
+        Debug.Log(anchor.collider.name);
 
-        if (curDis > maxDis)
-        {
-            lr.enabled = false;
-            Debug.LogError("Too long + TODO: Display");
-            curDis = 0;
-            startDis = 0;
-            notyetready = true;
-            movement = false;
-            return;
-        }
+        curDis = Vector2.Distance(transform.position, new Vector2(anchor.point.x, anchor.point.y));
+        startDis = Vector2.Distance(transform.position, new Vector2(anchor.point.x, anchor.point.y));
+
 
         notyetready = false;
-        lr.SetPosition(0, new Vector3(mPos.x, mPos.y, 0));
+        lr.SetPosition(0, new Vector3(anchor.point.x, anchor.point.y, 0));
         StartCoroutine(AnimateRope());
     }
 
     void ChangeColor()
     {
-        if (curDis > startDis - 0.5f) lr.material = rope_redm;
+        if (curDis > startDis) lr.material = rope_redm;
         else lr.material = ropem;
     }
 
