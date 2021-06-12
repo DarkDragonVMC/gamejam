@@ -28,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
 
     public int hooks;
 
+    public Animator anim;
+
     //Script References
     private AudioManager am;
 
@@ -47,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
         am = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         hooks = 3;
         GameObject.Find("HookDisplay").GetComponent<Text>().text = "Hooks: " + hooks;
+        am.Play("theme");
     }
 
     // Update is called once per frame
@@ -87,7 +90,6 @@ public class PlayerMovement : MonoBehaviour
             Debug.LogError("Ripped1 + TODO: Display");
             curDis = 0;
             rb.velocity = Vector2.zero;
-            GameObject.Find("Toolong").GetComponent<Animation>().Play();
             return;
         }
 
@@ -102,7 +104,6 @@ public class PlayerMovement : MonoBehaviour
             Debug.LogError("Ripped2 + TODO: Display");
             curDis = 0;
             rb.velocity = Vector2.zero;
-            GameObject.Find("Toolong").GetComponent<Animation>().Play();
             return;
         }
 
@@ -147,6 +148,7 @@ public class PlayerMovement : MonoBehaviour
             movement = false;
             Debug.LogError("Too long + TODO: Display");
             am.Play("too_long");
+            anim.Play("fade");
             return;
         }
 
@@ -157,6 +159,7 @@ public class PlayerMovement : MonoBehaviour
             movement = false;
             Debug.LogError("Too long + TODO: Display");
             am.Play("too_long");
+            anim.Play("fade");
             rb.velocity = Vector2.zero;
             return;
         }

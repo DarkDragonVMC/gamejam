@@ -189,11 +189,11 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
-  - name: theme
+  - name: themeq
     clip: {fileID: 8300000, guid: a68e0b765c810094593fe3dd337f687a, type: 3}
     volume: 1
     pitch: 1
-    loop: 0
+    loop: 1
     source: {fileID: 0}
   - name: lvlcomplete
     clip: {fileID: 8300000, guid: a03f527b7de9e9a41beec02fabf9f385, type: 3}
@@ -650,6 +650,7 @@ MonoBehaviour:
   rope_redm: {fileID: 2100000, guid: 4fc4335b876be954d98cdfe9d3fe085e, type: 2}
   animationTime: 0.1
   hooks: 0
+  anim: {fileID: 984324863}
   Mask:
     serializedVersion: 2
     m_Bits: 8
