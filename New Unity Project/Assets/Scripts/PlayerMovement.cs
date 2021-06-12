@@ -21,6 +21,10 @@ public class PlayerMovement : MonoBehaviour
     public Material ropem;
     public Material rope_redm;
 
+    public float animationTime;
+
+    public RaycastHit2D hit;
+
     //Schlampigkeit
     private bool ripped;
     private bool notyetready;
@@ -97,6 +101,9 @@ public class PlayerMovement : MonoBehaviour
         movement = true;
         mPos = Input.mousePosition;
         mPos = Camera.main.ScreenToWorldPoint(mPos);
+        Vector2 dir = new Vector2(mPos.x - transform.position.x, mPos.y - transform.position.y);
+
+        Physics2D.Raycast(transform.position, dir, maxDis, 3);
 
         curDis = Vector2.Distance(transform.position, new Vector2(mPos.x, mPos.y));
         startDis = Vector2.Distance(transform.position, new Vector2(mPos.x, mPos.y));
@@ -114,11 +121,29 @@ public class PlayerMovement : MonoBehaviour
 
         notyetready = false;
         lr.SetPosition(0, new Vector3(mPos.x, mPos.y, 0));
+        StartCoroutine(AnimateRope());
     }
 
     void ChangeColor()
     {
         if (curDis > startDis - 0.5f) lr.material = rope_redm;
         else lr.material = ropem;
+    }
+
+    IEnumerator AnimateRope()
+    {
+        float startTime = Time.time;
+
+        Vector3 startPosition = lr.GetPosition(1);
+        Vector3 endPosition = lr.GetPosition(0);
+
+        Vector3 pos = startPosition;
+        while(pos != endPosition)
+        {
+            float t = (Time.time - startTime) / animationTime / startDis;
+            pos = Vector3.Lerp(startPosition, endPosition, t);
+            lr.SetPosition(0, pos);
+            yield return null;
+        }
     }
 }
