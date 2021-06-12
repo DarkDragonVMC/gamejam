@@ -156,31 +156,31 @@ MonoBehaviour:
   - name: Die
     clip: {fileID: 8300000, guid: 5d8a9fcbfe9231340a04daff111c4757, type: 3}
     volume: 1
-    pitch: 0
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: hook
     clip: {fileID: 8300000, guid: 04159a63a8964dd45b3d68e876dd01ce, type: 3}
     volume: 1
-    pitch: 0
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: rip
     clip: {fileID: 8300000, guid: bdb9005ac1e1bbf4badee6446d68a60d, type: 3}
     volume: 1
-    pitch: 0
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Shoot
     clip: {fileID: 8300000, guid: 0d7a25a2bdb7c1549acf683a979d7978, type: 3}
     volume: 1
-    pitch: 0
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: too_long
     clip: {fileID: 8300000, guid: 2d7d626ae5977514583c3d61b654fd72, type: 3}
     volume: 1
-    pitch: 0
+    pitch: 1
     loop: 0
     source: {fileID: 0}
 --- !u!4 &66920501

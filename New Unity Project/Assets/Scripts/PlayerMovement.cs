@@ -108,9 +108,6 @@ public class PlayerMovement : MonoBehaviour
 
     void ShootHook()
     {
-        //Audio
-        am.Play("Shoot");
-
         lr.enabled = true;
         ripped = false;
         movement = true;
@@ -126,6 +123,7 @@ public class PlayerMovement : MonoBehaviour
             ripped = true;
             movement = false;
             Debug.LogError("Too long + TODO: Display");
+            am.Play("too_long");
             return;
         }
 
@@ -135,6 +133,7 @@ public class PlayerMovement : MonoBehaviour
             ripped = true;
             movement = false;
             Debug.LogError("Too long + TODO: Display");
+            am.Play("too_long");
             return;
         }
 
@@ -145,6 +144,10 @@ public class PlayerMovement : MonoBehaviour
         notyetready = false;
         lr.SetPosition(0, new Vector3(anchor.point.x, anchor.point.y, 0));
         StartCoroutine(AnimateRope());
+
+        //Audio
+        am.Play("Shoot");
+        Invoke("PlayHook", animationTime * startDis - 0.11f);
     }
 
     void ChangeColor()
@@ -162,8 +165,6 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 pos = startPosition;
 
-        if(pos == endPosition) am.Play("hook");
-
         while(pos != endPosition)
         {
             float t = (Time.time - startTime) / animationTime / startDis;
@@ -171,5 +172,10 @@ public class PlayerMovement : MonoBehaviour
             lr.SetPosition(0, pos);
             yield return null;
         }
+    }
+
+    void PlayHook()
+    {
+        am.Play("hook");
     }
 }
