@@ -7,11 +7,12 @@ public class LevelManager : MonoBehaviour
 {
 
     public Level[] levels;
+    public int curArray;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        curArray = 0;
     }
 
     // Update is called once per frame
@@ -22,6 +23,25 @@ public class LevelManager : MonoBehaviour
 
     public void SwitchToScene(int array)
     {
-        Instantiate(levels[array].prefab, Vector3.zero, Quaternion.identity);
+        curArray += 1;
+
+        if (array != -1) curArray = array;
+
+        GameObject after;
+        GameObject oldTrans = GameObject.Find("transition");
+
+        Vector3 pos = GameObject.Find("transition").transform.position;
+        float rot = GameObject.Find("transition").transform.rotation.z;
+        rot += levels[curArray].rotoffset.z;
+
+        pos.x += levels[curArray].offset.x;
+        pos.y += levels[curArray].offset.y;
+
+        after = Instantiate(levels[curArray].prefab, pos, Quaternion.identity);
+
+        after.transform.rotation = new Quaternion(0, 0, rot, 0);
+
+        Destroy(oldTrans);
+        return;
     }
 }

@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class LevelComplete : MonoBehaviour
 {
-    public void OnTriggerEnter2D(Collider2D collision)
+
+    private LevelManager lm;
+
+    private void Start()
     {
-        if(!collision)
-        {
-            UnityEngine.Debug.Log("Test");
-        }
-        
+        lm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        lm.SwitchToScene(-1);
     }
 }

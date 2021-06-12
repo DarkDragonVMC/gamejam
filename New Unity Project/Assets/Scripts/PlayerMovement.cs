@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) GameObject.Find("LevelManager").GetComponent<LevelManager>().SwitchToScene(0);
+        //if (Input.GetKeyDown(KeyCode.Space)) GameObject.Find("LevelManager").GetComponent<LevelManager>().SwitchToScene(0);
 
         if (!movement)
         {
