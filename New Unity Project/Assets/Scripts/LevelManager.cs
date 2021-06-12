@@ -41,7 +41,9 @@ public class LevelManager : MonoBehaviour
 
         after.transform.rotation = new Quaternion(0, 0, rot, 0);
 
-        Destroy(oldTrans);
+       
+
+        Destroy(oldTrans.transform.parent.gameObject);
         return;
     }
 }
