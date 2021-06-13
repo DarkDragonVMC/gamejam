@@ -46,7 +46,6 @@ public class PlayerMovement : MonoBehaviour
         lr = GetComponent<LineRenderer>();
         am = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         hooks = 3;
-        GameObject.Find("HookDisplay").GetComponent<Text>().text = "Hooks: " + hooks;
     }
 
     // Update is called once per frame
@@ -81,7 +80,6 @@ public class PlayerMovement : MonoBehaviour
             //Audio
             am.Play("rip");
             ripRope();
-            GameObject.Find("Ripped").GetComponent<Animator>().Play("ripped");
             return;
         }
 
@@ -89,10 +87,7 @@ public class PlayerMovement : MonoBehaviour
         {
             //Audio
             am.Play("rip");
-
             ripRope();
-            
-            GameObject.Find("Ripped").GetComponent<Animator>().Play("ripped");
             return;
         }
 
@@ -136,7 +131,6 @@ public class PlayerMovement : MonoBehaviour
             ripped = true;
             movement = false;
             am.Play("too_long");
-            GameObject.Find("Toolong").GetComponent<Animator>().Play("fade");
             return;
         }
 
@@ -146,7 +140,6 @@ public class PlayerMovement : MonoBehaviour
             ripped = true;
             movement = false;
             am.Play("too_long");
-            GameObject.Find("Toolong").GetComponent<Animator>().Play("fade");
             return;
         }
 
@@ -163,7 +156,6 @@ public class PlayerMovement : MonoBehaviour
         Invoke("PlayHook", animationTime * startDis - 0.11f);
 
         hooks -= 1;
-        GameObject.Find("HookDisplay").GetComponent<Text>().text = "Hooks: " + hooks;
     }
 
     void ChangeColor()

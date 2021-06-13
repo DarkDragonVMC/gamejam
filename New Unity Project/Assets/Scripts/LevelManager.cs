@@ -54,7 +54,6 @@ public class LevelManager : MonoBehaviour
         cam.StartCoroutine("MoveCam");
 
         pm.hooks = 3;
-        GameObject.Find("HookDisplay").GetComponent<Text>().text = "Hooks: " + pm.hooks;
         pm.ripRope();
 
         return;
