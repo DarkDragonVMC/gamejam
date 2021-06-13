@@ -22,6 +22,7 @@ public class RenderLine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        transform.position = transform.parent.position;
         Vector3 mPos = Input.mousePosition;
         mPos = Camera.main.ScreenToWorldPoint(mPos);
         Vector2 dir = new Vector2(mPos.x - transform.position.x, mPos.y - transform.position.y);

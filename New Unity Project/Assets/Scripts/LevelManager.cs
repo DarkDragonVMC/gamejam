@@ -27,7 +27,10 @@ public class LevelManager : MonoBehaviour
     }
 
     public void SwitchToScene(int array)
+         
     {
+        
+
         curArray += 1;
 
         if (array != -1) curArray = array;
@@ -45,9 +48,10 @@ public class LevelManager : MonoBehaviour
         after = Instantiate(levels[curArray].prefab, pos, Quaternion.identity);
 
         after.transform.rotation = new Quaternion(0, 0, rot, 0);
-
+       
         GameObject.Find("Player").transform.position = GameObject.Find("SpawnPoint").transform.position;
         Destroy(GameObject.Find("SpawnPoint"));
+
 
         Destroy(oldTrans.transform.parent.gameObject);
 

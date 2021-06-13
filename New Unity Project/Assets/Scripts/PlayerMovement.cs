@@ -67,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
         //Update Rope location
         lr.SetPosition(1, transform.position);
         
-        curDis = Vector2.Distance(transform.position, new Vector2(anchor.point.x, anchor.point.y));
+        if(startDis != 0)curDis = Vector2.Distance(transform.position, new Vector2(anchor.point.x, anchor.point.y));
 
         if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
             rb.velocity = Vector2.zero;
@@ -179,6 +179,7 @@ public class PlayerMovement : MonoBehaviour
         lr.SetPosition(0, Vector3.zero);
         lr.enabled = false;
         curDis = 0;
+        startDis = 0;
         rb.velocity = Vector2.zero;
     }
 
