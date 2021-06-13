@@ -46,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
         lr = GetComponent<LineRenderer>();
         am = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         hooks = 3;
+        lr.enabled = false;
     }
 
     // Update is called once per frame
