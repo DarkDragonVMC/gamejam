@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Timeline;
 using UnityEngine.UIElements;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -67,8 +68,8 @@ public class PlayerMovement : MonoBehaviour
 
         //Update Rope location
         lr.SetPosition(1, transform.position);
-        
-        if(startDis != 0)curDis = Vector2.Distance(transform.position, new Vector2(anchor.point.x, anchor.point.y));
+
+        if(movement)curDis = Vector2.Distance(transform.position, new Vector2(anchor.point.x, anchor.point.y)); 
 
         if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
             rb.velocity = Vector2.zero;
@@ -205,5 +206,12 @@ public class PlayerMovement : MonoBehaviour
     void PlayHook()
     {
         am.Play("hook");
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.name == "Enemy")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 }

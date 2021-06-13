@@ -8,9 +8,10 @@ public class EnemyAttack : MonoBehaviour {
 
     public GameObject player;
     public LevelManager lm;
+    
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

@@ -59,7 +59,7 @@ public class AudioManager : MonoBehaviour
             {
                 s.source.enabled = false;
             }
-            GameObject.Find("MuteAudio").GetComponent<Image>().sprite = soundOff;
+            GameObject.Find("Sound").GetComponent<Image>().sprite = soundOff;
             pm.ripRope();
             if (pm.hooks != 3) pm.hooks += 1;
             audioOn = false;
@@ -70,7 +70,7 @@ public class AudioManager : MonoBehaviour
             {
                 s.source.enabled = true;
             }
-            GameObject.Find("MuteAudio").GetComponent<Image>().sprite = soundOn;
+            GameObject.Find("Sound").GetComponent<Image>().sprite = soundOn;
             pm.ripRope();
             if (pm.hooks != 3) pm.hooks += 1;
             audioOn = true;
@@ -83,7 +83,7 @@ public class AudioManager : MonoBehaviour
         {
             Sound theme = Array.Find(sounds, sound => sound.name == "theme");
             theme.source.Stop();
-            GameObject.Find("MuteTheme").GetComponent<Image>().sprite = musicOff;
+            GameObject.Find("Music").GetComponent<Image>().sprite = musicOff;
             pm.ripRope();
             if (pm.hooks != 3) pm.hooks += 1;
             themeOn = false;
@@ -92,7 +92,7 @@ public class AudioManager : MonoBehaviour
         {
             Sound theme = Array.Find(sounds, sound => sound.name == "theme");
             theme.source.Play();
-            GameObject.Find("MuteTheme").GetComponent<Image>().sprite = musicOn;
+            GameObject.Find("Music").GetComponent<Image>().sprite = musicOn;
             pm.ripRope();
             if (pm.hooks != 3) pm.hooks += 1;
             themeOn = true;
