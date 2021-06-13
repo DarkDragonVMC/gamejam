@@ -80,13 +80,8 @@ public class PlayerMovement : MonoBehaviour
         {
             //Audio
             am.Play("rip");
-
-            ripped = true;
-            lr.SetPosition(0, Vector3.zero);
-            lr.enabled = false;
-            Debug.LogError("Ripped1 + TODO: Display");
-            curDis = 0;
-            rb.velocity = Vector2.zero;
+            ripRope();
+            GameObject.Find("Ripped").GetComponent<Animator>().Play("ripped");
             return;
         }
 
@@ -95,12 +90,9 @@ public class PlayerMovement : MonoBehaviour
             //Audio
             am.Play("rip");
 
-            ripped = true;
-            lr.SetPosition(0, Vector3.zero);
-            lr.enabled = false;
-            Debug.LogError("Ripped2 + TODO: Display");
-            curDis = 0;
-            rb.velocity = Vector2.zero;
+            ripRope();
+            
+            GameObject.Find("Ripped").GetComponent<Animator>().Play("ripped");
             return;
         }
 
@@ -143,7 +135,6 @@ public class PlayerMovement : MonoBehaviour
             lr.enabled = false;
             ripped = true;
             movement = false;
-            Debug.LogError("Too long + TODO: Display");
             am.Play("too_long");
             GameObject.Find("Toolong").GetComponent<Animator>().Play("fade");
             return;
@@ -154,10 +145,8 @@ public class PlayerMovement : MonoBehaviour
             lr.enabled = false;
             ripped = true;
             movement = false;
-            Debug.LogError("Too long + TODO: Display");
             am.Play("too_long");
             GameObject.Find("Toolong").GetComponent<Animator>().Play("fade");
-            rb.velocity = Vector2.zero;
             return;
         }
 
@@ -181,6 +170,15 @@ public class PlayerMovement : MonoBehaviour
     {
         if (curDis > startDis) lr.material = rope_redm;
         else lr.material = ropem;
+    }
+
+    public void ripRope()
+    {
+        ripped = true;
+        lr.SetPosition(0, Vector3.zero);
+        lr.enabled = false;
+        curDis = 0;
+        rb.velocity = Vector2.zero;
     }
 
     IEnumerator AnimateRope()

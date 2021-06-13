@@ -55,6 +55,7 @@ public class LevelManager : MonoBehaviour
 
         pm.hooks = 3;
         GameObject.Find("HookDisplay").GetComponent<Text>().text = "Hooks: " + pm.hooks;
+        pm.ripRope();
 
         return;
     }
