@@ -66,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
 
         //Update Rope location
         lr.SetPosition(1, transform.position);
-
+        
         curDis = Vector2.Distance(transform.position, new Vector2(anchor.point.x, anchor.point.y));
 
         if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
@@ -123,29 +123,38 @@ public class PlayerMovement : MonoBehaviour
         mPos = Camera.main.ScreenToWorldPoint(mPos);
         Vector2 dir = new Vector2(mPos.x - transform.position.x, mPos.y - transform.position.y);
 
+        RaycastHit2D oldanchor = Physics2D.Raycast(transform.position, dir, maxDis, Mask);
+
+        if (oldanchor.collider == null)
+        {
+            am.Play("too_long");
+            return;
+        }
+
+        if (oldanchor.distance >= maxDis)
+        {
+            am.Play("too_long");
+            return;
+        }
+
         anchor = Physics2D.Raycast(transform.position, dir, maxDis, Mask);
 
         if(anchor.collider == null)
         {
-            lr.enabled = false;
-            ripped = true;
-            movement = false;
+            curDis = startDis;
             am.Play("too_long");
             return;
         }
 
         if(curDis >= maxDis)
         {
-            lr.enabled = false;
-            ripped = true;
-            movement = false;
+            curDis = startDis;
             am.Play("too_long");
             return;
         }
 
         curDis = Vector2.Distance(transform.position, new Vector2(anchor.point.x, anchor.point.y));
         startDis = Vector2.Distance(transform.position, new Vector2(anchor.point.x, anchor.point.y));
-
 
         notyetready = false;
         lr.SetPosition(0, new Vector3(anchor.point.x, anchor.point.y, 0));

@@ -22,7 +22,7 @@ public class HookDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (pm.hooks == 1)
+        if (pm.hooks == 0)
         {
             hook1.SetActive(false);
             hook2.SetActive(false);
